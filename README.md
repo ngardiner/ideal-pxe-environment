@@ -25,6 +25,21 @@ This is the ISO mountpoint. By mounting it directly here, we avoid having to cre
 
 ## PHP Interface
 
+The PHP interface has 2 components
+
+## admin.php
+
+To be defined
+
+## boot.php
+
+This is the file that ipxe clients request in order to load the PXE menu. It has 2 key roles:
+
+   * Identify if we know this machine and if this machine has a specific PXE configuration defined
+      * If so, the machine will boot directly into its PXE target
+
+  * Identify if the machine needs any variables set - for example is it on a network from which we should use a different IP to reach the tftp server.
+
 ## Images and Resources
 
 The following files describe how images can be set up for each of these environments.
