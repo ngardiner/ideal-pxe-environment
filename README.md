@@ -31,9 +31,11 @@ The following files describe how images can be set up for each of these environm
 
 * Live Environments
    * [FreeDOS](images/freedos.md) - Provide the ability to flash BIOS and ROM images over the network
+   * [Ubuntu](images/ubuntu.md) - The Ubuntu Live CD provides both the ability to install Ubuntu and a Rescue Environment
 
 * Installers
-   * [FreeDOS](freedos.md)
+   * [FreeDOS](images/freedos.md)
+   * [Ubuntu](images/ubuntu.md)
 
 * Rescue Environments
-   * [PLD Linux Rescue](pld.md)
+   * [PLD Linux Rescue](images/pld.md) - PLD Linyx Rescue is an (older) Linux Rescue CD based on PLD Linux
