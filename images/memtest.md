@@ -4,7 +4,9 @@
 
 Memtest86+ is an essential diagnostics tool for testing memory within a machine.
 
-## Download
+## Downloading Memtest86+
+
+### Download Binaries
 
 The following steps will download various Memtest86+ images 
 
@@ -17,11 +19,21 @@ wget https://www.memtest.org/download/2.10/memtest86+-2.10.bin.gz
 wget https://www.memtest.org/download/2.11/memtest86+-2.11.bin.gz
 wget https://www.memtest.org/download/4.00/memtest86+-4.00.bin.gz
 wget https://www.memtest.org/download/4.10/memtest86+-4.10.bin.gz
+wget https://www.memtest.org/download/4.20/memtest86+-4.20.bin.gz
+wget https://www.memtest.org/download/5.01/memtest86+-5.01.bin.gz
+wget https://www.memtest.org/download/5.31b/memtest86+-5.31b.bin.gz
 
 gzip -d *.gz
 ```
 
-## iPXE Configuration
+### Download ISOs
+
+If you find the binary files less than useful (see the note at the bottom of the screen about possible errors using the binary executables) you can instead download the bootable ISOs
+
+wget https://www.memtest.org/download/2.00/memtest86+-2.00.iso.gz
+wget https://www.memtest.org/download/4.00/memtest86+-4.00.iso.gz
+
+## iPXE Configuration - Binary
 
 ### Memtest86+ v2.00
 
@@ -75,7 +87,7 @@ goto boot_image
 
 ```
 :memtest-420
-set util_file images2/Memtest86+_V4.20
+set util_file memtest86+/memtest86+-4.20.bin
 goto boot_image
 ```
 
@@ -83,7 +95,15 @@ goto boot_image
 
 ```
 :memtest-501
-set util_file images2/Memtest86+_V5.01
+set util_file memtest86+/memtest86+-5.01.bin
+goto boot_image
+```
+
+### Memtest86+ v5.31b
+
+```
+:memtest-531b
+set util_file memtest86+/memtest86+-5.31b.bin
 goto boot_image
 ```
 
