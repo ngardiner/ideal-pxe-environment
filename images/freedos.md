@@ -25,7 +25,7 @@ The approach that we will take for this is a 2-part process:
 
 1 Create a directory where we place all of our BIOS updates - for our machine types, NIC cards, Video Cards, SATA controllers etc.
 
-For this, we create a dedicated FreeDOS directory under the tftpboot root and then a subdirectory for ROMs
+For this, we create a dedicated FreeDOS directory under the tftpboot root and then a subdirectory for ROMs to be stored.
 
 ```
 mkdir -p /var/lib/tftpboot/freedos/live/roms
@@ -33,15 +33,17 @@ mkdir -p /var/lib/tftpboot/freedos/live/roms
 
 Into this directory, you should create a structure which allows for all the various ROMS you will need to flash.
 
+Be sure to make the filenames 8.3 friendly, as the resulting image will be FAT16 for compatibility's sake.
+
 2 Create a ROM update image and inject these files into it
 
-   * This will create a 64MB image to be attached as a secondary disk to the FreeDOS bootable image.
+   * This will create a 512MB image to be attached as a secondary disk to the FreeDOS bootable image.
 
 ```
-truncate updates.img --size 32MB
+truncate updates.img --size 512MB
 
 sfdisk updates.img << EOF
-63,,b
+2048,,C,*
 EOF
 ```
 
@@ -53,7 +55,7 @@ Note that we set a variable, loopid, to avoid an issue where you may already hav
 export LOOPID=0
 losetup /dev/loop${LOOPID} updates.img
 partx -u /dev/loop${LOOPID}
-mkfs.vfat /dev/loop${LOOPID}p1 
+mkfs.vfat -F 16 /dev/loop${LOOPID}p1 
 ```
 
    * Sync the files to the image file
@@ -64,6 +66,13 @@ This step of the process is safe to run again and again as you add more files to
 mkdir -p /tmp/updates
 mount /dev/loop${LOOPID}p1 /tmp/updates
 rsync -av ./ --exclude updates.img /tmp/updates/
+```
+ 
+   * Unmount everything
+
+```
+umount /tmp/updates
+losetup -d /dev/loop${LOOPID}
 ```
 
 3 Download the FreeDOS bootable floppy image
@@ -79,14 +88,10 @@ wget http://www.freedos.org/download/download/FD12FLOPPY.zip
 :freedos_live
 set base-url http://${server_ip}/tftpboot/freedos/live
 sanhook ${base-url}/roms/updates.img || goto failed
-kernel memdisk raw
+kernel ${memdisk} raw
 initrd ${base-url}/FD12FLOPPY.zip
 boot || goto failed
 ```
-
-## Follow-Up
-
-This works fine for
 
 # References
 
