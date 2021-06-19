@@ -35,7 +35,7 @@ Into this directory, you should create a structure which allows for all the vari
 
 2 Create a ROM update image and inject these files into it
 
-   * This will create a 32MB image to be attached as a secondary disk to the FreeDOS bootable
+   * This will create a 64MB image to be attached as a secondary disk to the FreeDOS bootable image.
 
 ```
 truncate updates.img --size 32MB
@@ -47,12 +47,26 @@ EOF
 
    * Create a FAT filesystem
 
+Note that we set a variable, loopid, to avoid an issue where you may already have a loop device mounted as loop0. You can modify this to suit.
+
 ```
-losetup /dev/loop0 updates.img
-mkfs.vfat /dev/loop0p1 
+export LOOPID=0
+losetup /dev/loop${LOOPID} updates.img
+partx -u /dev/loop${LOOPID}
+mkfs.vfat /dev/loop${LOOPID}p1 
 ```
 
-3 Define a FreeDOS boot 
+   * Sync the files to the image file
+
+This step of the process is safe to run again and again as you add more files to the 
+
+```
+mkdir -p /tmp/updates
+mount /dev/loop${LOOPID}p1 /tmp/updates
+rsync -av ./ --exclude updates.img /tmp/updates/
+```
+
+3 Download the FreeDOS bootable floppy image
 
 ```
 cd /var/lib/tftpboot/freedos/live
@@ -69,6 +83,10 @@ kernel memdisk raw
 initrd ${base-url}/FD12FLOPPY.zip
 boot || goto failed
 ```
+
+## Follow-Up
+
+This works fine for
 
 # References
 
