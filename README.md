@@ -52,5 +52,9 @@ The following files describe how images can be set up for each of these environm
    * [FreeDOS](images/freedos.md)
    * [Ubuntu](images/ubuntu.md)
 
+* Diagnostics
+   * [Hardware Diagnostics Tool](images/hdt.md)
+   * [MemTest86+](images/memtest.md)
+
 * Rescue Environments
    * [PLD Linux Rescue](images/pld.md) - PLD Linyx Rescue is an (older) Linux Rescue CD based on PLD Linux
