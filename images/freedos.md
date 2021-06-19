@@ -33,4 +33,43 @@ mkdir -p /var/lib/tftpboot/freedos/live/roms
 
 Into this directory, you should create a structure which allows for all the various ROMS you will need to flash.
 
-1 Download a FreeDOS floppy image and inject these files into it
+2 Create a ROM update image and inject these files into it
+
+   * This will create a 32MB image to be attached as a secondary disk to the FreeDOS bootable
+
+```
+truncate updates.img --size 32MB
+
+sfdisk updates.img << EOF
+63,,b
+EOF
+```
+
+   * Create a FAT filesystem
+
+```
+losetup /dev/loop0 updates.img
+mkfs.vfat /dev/loop0p1 
+```
+
+3 Define a FreeDOS boot 
+
+```
+cd /var/lib/tftpboot/freedos/live
+wget http://www.freedos.org/download/download/FD12FLOPPY.zip
+```
+
+   * Place the following block in your ipxe menu file to allow the new image to be booted alongside FreeDOS
+
+```
+:freedos_live
+set base-url http://${server_ip}/tftpboot/freedos/live
+sanhook ${base-url}/roms/updates.img || goto failed
+kernel memdisk raw
+initrd ${base-url}/FD12FLOPPY.zip
+boot || goto failed
+```
+
+# References
+
+   * With thanks to https://possiblelossofprecision.net/?p=2312 for the best approach to the live FreeDOS target
