@@ -4,7 +4,7 @@
 
 PLD Linux is a useful rescue CD which, while getting a bit old (last release was 2013), still has value in the list of Rescue images.
 
-We won't create an installer boot entry for PLD because it isn't a distro we are likely to deploy, but we will create entries both for the PLD Stable (2011-02-12) and beta (2013-03-12) images. These are particularly useful if you need a rescue CD with an older kernel version due to any compatibility issue, as Stable uses kernel version x and beta uses kernel version y.
+We won't create an installer boot entry for PLD because it isn't a distro we are likely to deploy, but we will create entries both for the PLD Stable (2011-02-12) and beta (2013-03-12) images. These are particularly useful if you need a rescue CD with an older kernel version due to any compatibility issue, as Stable uses kernel version 2.6.37 and beta uses kernel version y.
 
 Both can be downloaded from http://rescuecd.pld-linux.org/. 
 
@@ -44,9 +44,9 @@ For the PLD image, we boot it by fetching the kernel and initrd over HTTP. The f
 PLD Linux Stable (2011-02-12)
 ```
 :pld-20110212
-set path http://${server_ip}/tftpboot/Linux/Rescue/PLD-20110212
-kernel ${path{/boot/isolinux/vmlinuz6
-initrd ${path}/rescue6.cpi
+set base-url http://${server_ip}/tftpboot/Linux/Rescue/PLD-20110212
+kernel ${base-url}/boot/isolinux/vmlinuz6 root=/dev/ram0 ro
+initrd ${base-url}/rescue6.cpi
 boot || goto fail
 ```
 
