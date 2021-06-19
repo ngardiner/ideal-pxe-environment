@@ -21,14 +21,19 @@ This is the TFTP root directory, in the default directory that tftpd-hpa expects
 
   * /var/www/html/iso
 
-This is the ISO mountpoint. 
+This is the ISO mountpoint. By mounting it directly here, we avoid having to create another alias in Apache, however it could absolutely be set up the way that tftpboot is.
 
 ## PHP Interface
 
 ## Images and Resources
+
+The following files describe how images can be set up for each of these environments.
 
 * Live Environments
    * [FreeDOS](images/freedos.md) - Provide the ability to flash BIOS and ROM images over the network
 
 * Installers
    * [FreeDOS](freedos.md)
+
+* Rescue Environments
+   * [PLD Linux Rescue](pld.md)
