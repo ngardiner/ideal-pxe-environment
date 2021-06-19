@@ -51,6 +51,8 @@ EOF
 
 Note that we set a variable, loopid, to avoid an issue where you may already have a loop device mounted as loop0. You can modify this to suit.
 
+If you are only looking to update the image with new files using the commands in the step below, you only need to run the first 3 lines of the below commands.
+
 ```
 export LOOPID=0
 losetup /dev/loop${LOOPID} updates.img
