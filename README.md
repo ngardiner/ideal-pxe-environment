@@ -1,7 +1,10 @@
 # ideal-pxe-environment
-Documents an ideal PXE environment containing a web interface for control
 
 ## Introduction
+
+Over the years, I've had numerous half-working PXE boot approaches, this project is an attempt to do away with USB key boot entirely, making full use of PXE capabilities across the network.
+
+This project documents an ideal PXE environment containing a web interface for control of boot for machines, as well as an interactive PXE menu for machines that don't have specific boot settings.
 
 ## TFTP Server
 
@@ -46,15 +49,16 @@ The following files describe how images can be set up for each of these environm
 
 * Live Environments
    * [FreeDOS](images/freedos.md) - Provide the ability to flash BIOS and ROM images over the network
-   * [Ubuntu](images/ubuntu.md) - The Ubuntu Live CD provides both the ability to install Ubuntu and a Rescue Environment
+   * [Ubuntu](images/ubuntu.md) - The Ubuntu Live CD provides both the ability to install Ubuntu and a Rescue Environment **not documented**
 
 * Installers
-   * [FreeDOS](images/freedos.md)
-   * [Ubuntu](images/ubuntu.md)
+   * [FreeDOS](images/freedos.md) **not finished**
+   * [Proxmox](images/proxmox.md) **not finished**
+   * [Ubuntu](images/ubuntu.md) **not documented**
 
 * Diagnostics
    * [Hardware Diagnostics Tool](images/hdt.md)
-   * [MemTest86+](images/memtest.md)
+   * [MemTest86+](images/memtest.md) **issues to resolve**
 
 * Rescue Environments
    * [PLD Linux Rescue](images/pld.md) - PLD Linyx Rescue is an (older) Linux Rescue CD based on PLD Linux
