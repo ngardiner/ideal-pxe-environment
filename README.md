@@ -6,6 +6,14 @@ Over the years, I've had numerous half-working PXE boot approaches, this project
 
 This project documents an ideal PXE environment containing a web interface for control of boot for machines, as well as an interactive PXE menu for machines that don't have specific boot settings.
 
+## Custom iPXE Image
+
+This project uses a [custom iPXE image build](docs/ipxe_build.md) to build an IPXE image that all 
+
+   * HTTP
+   * iSCSI
+   * NFS
+
 ## TFTP Server
 
 The TFTP server provides both TFTP and HTTP download for boot files and ISO images, as well as 
