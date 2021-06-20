@@ -13,8 +13,11 @@ Edit file src/config/general.h
       * MULTIBOOT
       * PXE
       * SCRIPT
+   * Enable all of the commands listed with the ```_CMD``` suffix
 
 ### Script
+
+The purpose of the iPXE script is straightforward - it will repeatedly try to contact the TFTP server until it gets a response. This allows for retries of boot/network connectivity if there is an issue.
 
 ```
 #!ipxe
@@ -28,3 +31,14 @@ chain http://[server]/boot.php?mac=${net0/mac}&asset=${asset:uristring}&serial=$
 
 ### Build
 
+```
+make bin/undionly.kpxe EMBED=../../ipxe-script.txt
+cp   bin/undionly.kpxe ../../undionly-custom.kpxe
+```
+
+In DHCP servers, configure this as the boot filename
+
+```
+  next-server 192.168.100.1;
+  filename "/ipxe/undionly-custom.kpxe";
+```
