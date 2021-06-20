@@ -1,7 +1,21 @@
 # iPXE build
 
-git clone
+## Introduction
+
+iPXE is an excellent open-source PXE ROM replacement.
+
+There are many ways to get machines to boot using iPXE, but we take the simplest approach in this instance, by having the existing PXE ROM boot 
+
+## Setting up iPXE
+
+### Fetch Sources
+
+Fetch the latest ipxe sources:
+
+```
+git clone https://github.com/ipxe/ipxe
 git checkout v1.21.1
+```
 
 Edit file src/config/general.h
 
@@ -30,6 +44,8 @@ chain http://[server]/boot.php?mac=${net0/mac}&asset=${asset:uristring}&serial=$
 ```
 
 ### Build
+
+Use the following commands to build the iPXE image and place it in the tftpboot directory.
 
 ```
 make bin/undionly.kpxe EMBED=../../ipxe-script.txt
