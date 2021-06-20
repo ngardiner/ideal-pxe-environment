@@ -21,8 +21,8 @@ wget http://download.proxmox.com/iso/proxmox-ve_6.4-1.iso
 mkdir -p /var/lib/tftpboot/Linux/Proxmox/6.4
 mkdir -p /tmp/pxmx
 mount proxmox-ve_6.4-1.iso /tmp/pxmx
-cp /tmp/pxmx/x
-cp /tmp/pxmx/x
+cp /tmp/pxmx/boot/linux26 /var/lib/tftpboot/Linux/Proxmox/6.4/
+cp /tmp/pxmx/boot/initrd.img /var/lib/tftpboot/Linux/Proxmox/6.4/
 ```
 
 3 Define the iPXE menu entry for Proxmox
